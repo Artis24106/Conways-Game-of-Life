@@ -62,6 +62,9 @@ class Game {
                 }
             }
         }
+        // this.fill(0, 0);
+        // this.fill(1, 0);
+        // this.fill(1, 1);
         // this.fill(2, 2);
         // this.fill(2, 3);
         // this.fill(3, 2);
@@ -80,18 +83,27 @@ class Game {
     next() {
         var notChange = true;
         for (var i = 0; i < this.size; i++) {
+            var count = Array(3).fill(0);
+            // console.log("[{0}] {1}".format(0, count[0]));
+            // console.log("[{0}] {1}".format(1, count[1]));
+            // console.log("[{0}] {1}".format(2, count[2]));
+            for (var p = -1; p <= 1; p++) count[1] += this.checkAlive(i + p, 0);
+
             for (var j = 0; j < this.size; j++) {
-                var count = 0;
-                for (var p = -1; p <= 1; p++) {
-                    for (var q = -1; q <= 1; q++) {
-                        if ((p | q) === 0) continue;
-                        count += this.checkAlive(i + p, j + q);
-                    }
-                }
+                count[(j + 2) % 3] = 0;
+                for (var p = -1; p <= 1; p++)
+                    count[(j + 2) % 3] += this.checkAlive(i + p, j + 1);
+
+                // var haha = "[{0}] ".format(j);
+                // for (var el of count) haha += "{0} ".format(el);
+                // console.log(haha);
+
+                var total = -this.preStatus[i][j];
+                for (var el of count) total += el;
                 if (this.checkAlive(i, j)) {
-                    this.nowStatus[i][j] = count === 2 || count === 3 ? 1 : 0;
+                    this.nowStatus[i][j] = total === 2 || total === 3 ? 1 : 0;
                 } else {
-                    this.nowStatus[i][j] = count === 3 ? 1 : 0;
+                    this.nowStatus[i][j] = total === 3 ? 1 : 0;
                 }
                 if (this.nowStatus[i][j] != this.preStatus[i][j]) {
                     this.table.changeColor(i, j);
@@ -111,7 +123,7 @@ class Game {
         // }
         // console.log(toPrint);
         // console.log(toPrint2);
-        this.preStatus = JSON.parse(JSON.stringify(this.nowStatus));
+        this.preStatus = JSON.parse(JSON.stringify(this.nowStatus)); // copy by value
         return !notChange;
     }
 

@@ -1,25 +1,31 @@
-$cell-size: 20px;
-$cell-border-size: 0.1px;
+$cell-size: 5px;
+$cell-border-size: 2px;
+$color-alive: #333333;
 
 body {
-    width: 100%;
+	width: 100%;
 }
+
 table {
-    position: absolute;
-    top: 0px;
-    left: 0px;
+	// position: absolute;
+	// top: 0px;
+	// left: 0px;
 }
 
 table,
 th,
 td {
-    border: $cell-border-size solid black;
-    border-collapse: collapse;
+	border: $cell-border-size solid #777777;
+	border-collapse: collapse;
 }
 
 th,
 td {
-    width: $cell-size;
-    height: $cell-size;
-    text-align: center;
+	width: $cell-size;
+	height: $cell-size;
+	text-align: center;
+}
+
+.alive {
+	background-color: $color-alive;
 }

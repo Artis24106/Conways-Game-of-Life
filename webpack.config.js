@@ -1,3 +1,4 @@
+var webpack = require("webpack");
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -79,6 +80,10 @@ module.exports = {
                 removeAttributeQuotes: true
                 // 移除屬性的引號
             }
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
         })
     ]
 };

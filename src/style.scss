@@ -1,21 +1,26 @@
 $cell-size: 5px;
 $cell-border-size: 2px;
 $color-alive: #333333;
+$color-primary: rgb(233, 188, 40);
+$color-secondary: #333333;
+$color-alert: rgb(233, 69, 40);
+$color-primary-hover: rgb(201, 166, 24);
+$color-alert-hover: rgb(213, 65, 39);
+$color-cell-border: #777777;
+$ui-border-size: 1.5px;
+$font-family: consolas;
 
 body {
 	width: 100%;
-}
-
-table {
-	// position: absolute;
-	// top: 0px;
-	// left: 0px;
+	padding: 15px;
+	padding-top: 0px;
+	margin: 0px;
 }
 
 table,
 th,
 td {
-	border: $cell-border-size solid #777777;
+	border: $cell-border-size solid $color-cell-border;
 	border-collapse: collapse;
 }
 
@@ -26,6 +31,78 @@ td {
 	text-align: center;
 }
 
+input,
+button {
+	height: 100%;
+	margin: 0px;
+	padding: 6px 23px;
+	display: block;
+	border: $ui-border-size #444444 solid;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+button {
+	color: $color-secondary;
+	border-left: none;
+
+	&#gameBtn {
+		background-color: $color-primary;
+
+		&:hover {
+			cursor: pointer;
+			background-color: $color-primary-hover;
+		}
+	}
+
+	&#resetBtn {
+		background-color: $color-alert;
+
+		&:hover {
+			cursor: pointer;
+			background-color: $color-alert-hover;
+		}
+	}
+}
+
+* {
+	font-family: $font-family;
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+h1 {
+	font-size: 2rem;
+}
+
 .alive {
 	background-color: $color-alive;
+}
+
+.rounded-right {
+	border-radius: 0px 5px 5px 0px;
+}
+
+.rounded-left {
+	border-radius: 5px 0px 0px 5px;
+}
+
+.rounded {
+	border-radius: 5px;
+}
+
+.container {
+	padding-left: 20px;
+}
+
+#selectionArea {
+	display: flex;
+	flex-direction: row;
+}
+
+#gameBoard {
+	margin-top: 20px;
+	margin-left: 5px;
 }

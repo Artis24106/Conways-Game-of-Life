@@ -5,5 +5,16 @@
     <meta content="width=device-width,initial-scale=1" name=viewport>
     <title>Conway's Game of Life</title>
   <link href=main.css rel=stylesheet></head>
-  <body><script src=main.js type=text/javascript></script></body>
+  <body>
+    <h1>Conway's Game of Life (by Artis24106)</h1>
+    <div class=container>
+      <div id=selectionArea>
+        <input class=rounded-left id=gameInput placeholder="Input table size plz." type=text>
+        <button id=gameBtn>START</button>
+        <button id=resetBtn class=rounded-right>RESET</button>
+      </div>
+      <div id=gameBoard></div>
+      <h2 id=stepCount></h2>
+    </div>
+  <script src=main.js type=text/javascript></script></body>
 </html>

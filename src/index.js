@@ -1,7 +1,8 @@
-import styles from "./style.scss";
+import "./style.scss";
 import "jquery";
 
 let Array2D = (r, c) => [...Array(r)].map(x => Array(c).fill(0));
+let running = 0;
 async function sleep(ms = 0) {
     return new Promise(r => setTimeout(r, ms));
 }
@@ -33,7 +34,7 @@ class Table {
         for (var i = 0; i < height; i++) tmp += el;
         var ret = createElement("tbody", tmp);
         ret = createElement("table", ret);
-        $("body").prepend(ret);
+        $("#gameBoard").prepend(ret);
     }
 
     changeColor(y, x) {
@@ -133,14 +134,27 @@ class Game {
     }
 }
 
-async function main() {
-    var game = new Game(50);
+async function main(size) {
+    var game = new Game(size);
     var sleepTime = 50;
+    var count = 0;
     await sleep(sleepTime);
     while (game.next()) {
         await sleep(sleepTime);
+        $("#stepCount").text("Step {0}".format(count++));
+        console.log(running);
     }
-    $("body").append(createElement("h2", "FINISH"));
+    $("#stepCount").text("Step {0} {1}".format(count - 1, "finish!"));
 }
 
-main();
+$("#gameBtn").on("click", function() {
+    const val = parseInt($("#gameInput").val());
+    if (Number.isInteger(val) && val > 0 && !running) {
+        running = 1;
+        main(val);
+    }
+});
+
+$("#resetBtn").on("click", function() {
+    location.reload();
+});
